@@ -34,6 +34,12 @@ const Navbar = () => {
         </NavLink>
 
 
+        <NavLink to='http://localhost:3001/' className="flex flex-col items-center gap-1">
+          <p>Chatrooms</p>
+          <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
+        </NavLink>
+
+
       </ul>
       <div className='flex items-center gap-6'>
         <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer'/>
