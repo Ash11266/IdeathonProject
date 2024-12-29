@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { MessageCircle, Users } from 'lucide-react';
 
 interface ChatHeaderProps {

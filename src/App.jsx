@@ -5,6 +5,8 @@ import Collection from './pages/Collection'
 import Home from './pages/home'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import ChatRooms from './pages/ChatRooms'
+import ChatRoom from './pages/ChatRoom'
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
@@ -31,8 +33,8 @@ const App = () =>  {
       <Route path='/Login' element={<Login/>}/ >
       <Route path='/Place-Order' element={<PlaceOrder/>}/ >
       <Route path='/Orders' element={<Orders/>}/ >
-
-
+      <Route path='/chat' element={<ChatRooms/>}/>
+      <Route path='/chatroom' element={<ChatRoom/>}/>
       
       </Routes>
       <Footer/>
