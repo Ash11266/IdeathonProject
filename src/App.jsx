@@ -10,11 +10,12 @@ import ChatRoom from './pages/ChatRoom'
 import Product from './pages/Product'
 import Cart from './pages/Cart'
 import Login from './pages/Login'
-import PlaceOrder from './pages/placeOrder'
+import PlaceOrder from './pages/PlaceOrder'
 import Orders from './pages/Orders'
 import Footer from './components/Footer'
 import SearchBar from './components/SearchBar'
 import { ToastContainer, toast } from 'react-toastify';
+import Verify from './pages/Verify'
 
 const App = () =>  {
   return (
@@ -33,6 +34,7 @@ const App = () =>  {
       <Route path='/Login' element={<Login/>}/ >
       <Route path='/Place-Order' element={<PlaceOrder/>}/ >
       <Route path='/Orders' element={<Orders/>}/ >
+      <Route path='/verify' element={<Verify/>}/ >
       <Route path='/chat' element={<ChatRooms/>}/>
       <Route path='/chatroom' element={<ChatRoom/>}/>
       

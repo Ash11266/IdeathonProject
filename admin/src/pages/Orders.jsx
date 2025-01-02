@@ -5,6 +5,7 @@ import axios from "axios"
 import {backendUrl} from '../App'
 import { toast } from "react-toastify"
 import { assets } from "../assets/assets"
+import { console } from "inspector"
 
 const Orders=({token})=>{
 
@@ -26,6 +27,19 @@ const Orders=({token})=>{
       toast.error(error.message)
     }
   }
+  const statusHandler=async(event,orderId)=>{
+    try {
+      const response=await axios.post(backendUrl+'/api/order/status',{orderId,status:event.target.value},{headers:{token}})
+      if (response.data.success) {
+        await fetchAllOrders()
+        
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(response.data.message)
+      
+    }
+  }
 
   useEffect(()=>{
     fetchAllOrders();
@@ -45,7 +59,7 @@ const Orders=({token})=>{
                 </p>
               ))}
             </div>
-            <p>{order.address.first+" "+ order.address.lastName}</p>
+            <p className="mt-3 mb-2 font-medium">{order.address.first+" "+ order.address.lastName}</p>
             <div>
               <p>{order.address.street+","}</p>
               <p>{order.address.city+", "+order.address.state+", "+order.address.country+", "+order.address.zipcode}</p>
@@ -54,13 +68,13 @@ const Orders=({token})=>{
 
           </div>
           <div>
-            <p>Items:{orders.items.length}</p>
-            <p>Method:{orders.paymentMethod}</p>
+            <p className="text-sm sm:text-[15px]">Items:{orders.items.length}</p>
+            <p className="mt-3">Method:{orders.paymentMethod}</p>
             <p>Payment:{orders.payment?'Done':'Pending'}</p>
             <p>Date:{new Date(order.date).toLocaleDateString()}</p>
           </div>
-          <p>{currency}{order.amount}</p>
-          <select>
+          <p className="text-sm sm:text-[15px]" >{currency}{order.amount}</p>
+          <select onChange={(event)=>statusHandler(event,order._id)} value={order.status} className="p-2 font-semibold">
             <option value="Order Placed">Order Placed</option>
             <option value="Packing">Packing</option>
             <option value="Shipped">Shipped</option>
