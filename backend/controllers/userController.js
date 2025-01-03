@@ -29,7 +29,7 @@ const loginUser= async(req,res)=>{
 }catch(error)
 {
     console.log(error);
-   res.json({success:false,mesaage:error.message})
+   res.json({success:false,message:error.message})
 }
 }
 
@@ -70,7 +70,7 @@ const registerUser=async(req,res)=>{
    }       catch(error)
    {
        console.log(error);
-       res.json({success:false,mesaage:error.message})
+       res.json({success:false,message:error.message})
    }
 }
 
@@ -88,7 +88,7 @@ try {
 
 } catch (error) {
     console.log(error);
-       res.json({success:false,mesaage:error.message})
+       res.json({success:false,message:error.message})
 }
 }
 export{ loginUser,registerUser,adminLogin}

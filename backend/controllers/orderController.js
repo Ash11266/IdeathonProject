@@ -1,11 +1,16 @@
-
+import dotenv from 'dotenv';
+dotenv.config();
 import orderModel from '../models/orderModel.js'
 import userModel from '../models/userModel.js'
+
 import Stripe from 'stripe'
 const currency='inr'
 const deliveryCharge=10
 
 const stripe=new Stripe(process.env.STRIPE_SECRET_KEY)
+if (!process.env.STRIPE_SECRET_KEY) {
+    throw new Error('STRIPE_SECRET_KEY is not defined');
+  }
 
 const placeOrder= async(req,res)=>{
    try{
@@ -110,7 +115,7 @@ const allOrders= async(req,res)=>{
         res.json({success:true,orders})
     } catch (error) {
         console.log(error)
-       res.json({success:false,mesaage:error.message})
+       res.json({success:false,message:error.message})
     }
 }
 
@@ -121,7 +126,7 @@ const userOrders= async(req,res)=>{
         res.json({success:true,orders})
       } catch (error) {
        console.log(error)
-       res.json({success:false,mesaage:error.message}) 
+       res.json({success:false,message:error.message}) 
       }
        
     
@@ -135,10 +140,11 @@ try {
     
 } catch (error) {
     console.log(error)
-    res.json({success:false,mesaage:error.message}) 
+    res.json({success:false,message:error.message}) 
     
 }
    
 }
 
 export{verifyStripe,placeOrder,placeOrderRazorpay,placeOrderStripe,allOrders,updateStatus,userOrders};
+
