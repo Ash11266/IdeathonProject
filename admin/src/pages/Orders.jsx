@@ -5,7 +5,7 @@ import axios from "axios"
 import {backendUrl} from '../App'
 import { toast } from "react-toastify"
 import { assets } from "../assets/assets"
-import { console } from "inspector"
+
 
 const Orders=({token})=>{
 
@@ -53,11 +53,17 @@ const Orders=({token})=>{
             <img className="w-12"src={assets.parcel_icon} alt="Parcel Icon" />
             <div>
             <div>
-              {order.items.map((item, itemIndex) => (
-                <p className="py-0.5" key={itemIndex}>
+              {order.items.map((item, itemIndex) => {
+                if (index===order.length.items-1) {
+                  return <p className="py-0.5" key={itemIndex}>
                   {item.name} x {item.quantity} <span>{item.size}</span>
-                </p>
-              ))}
+                </p> 
+                }
+                else{
+                return <p className="py-0.5" key={itemIndex}>
+                  {item.name} x {item.quantity} <span>{item.size}</span>
+                </p>}
+              })}
             </div>
             <p className="mt-3 mb-2 font-medium">{order.address.first+" "+ order.address.lastName}</p>
             <div>

@@ -7,7 +7,7 @@ import Stripe from 'stripe'
 const currency='inr'
 const deliveryCharge=10
 
-const stripe=new Stripe(process.env.STRIPE_SECRET_KEY)
+const stripe=new Stripe("sk_test_51QcTj4IX8xxWzZl0dAFSqGS95ZsgAKOyHXKD6UtZpXjZShRor6Fo2mDJozFszV6e52U27rP3zuTyTwoui7bMhlfa00L91z8nWP")
 if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error('STRIPE_SECRET_KEY is not defined');
   }
