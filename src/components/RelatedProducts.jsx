@@ -6,6 +6,7 @@ import Productitem from './Productitem';
 const RelatedProducts = ({category,subCategory}) => {
   const{products}=useContext(ShopContext);
   const[related,setRelated]=useState([]);
+
   useEffect(()=>{
     if(products.length>0){
       let productsCopy=products.slice();
@@ -14,7 +15,7 @@ const RelatedProducts = ({category,subCategory}) => {
       setRelated(products.slice(0,5));
     }
 
-  },[])
+  },[products])
   return (
     <div className='my-24'>
       <div className='text-center text-3xl py-2'>

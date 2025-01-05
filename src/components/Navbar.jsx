@@ -9,18 +9,17 @@ const Navbar = () => {
 
 
  const logout=()=>{
+  navigate('/login')
   localStorage.removeItem('token')
-  
-
   setToken('')
   setCartItems({})
-  navigate('/login')
+  
 
 }
 
   return (
     <div className='flex items-center justify-between py-5 font-medium'>
-     <NavLink to='/'><img src={assets.logo} className='w-36' alt=''/></NavLink> 
+     <Link to={'/'}><img src={assets.logo} className='w-36' alt=''/></Link> 
       <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
         <NavLink to='/' className="flex flex-col items-center gap-1">
           <p>HOME</p>
@@ -54,7 +53,7 @@ const Navbar = () => {
 
       </ul>
       <div className='flex items-center gap-6'>
-        <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer'/>
+        <img onClick={()=>{setShowSearch(true)}} src={assets.search_icon} className='w-5 cursor-pointer'/>
         <div className='group relative'>
           <img onClick={()=> token?null:navigate('/login')} className='w-5 cursor-pointer' src={assets.profile_icon} alt="" />
           {/*Dropdown Menu */}

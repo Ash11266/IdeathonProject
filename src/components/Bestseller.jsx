@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
-import Title from './Title';
+import Title from '../components/Title';
 import Productitem from './Productitem';
 
 const Bestseller = () => {
@@ -15,10 +15,12 @@ const Bestseller = () => {
         <div className='py-8 text-center text-3xl'>
             <Title text1={'BEST'} text2={'SELLERS'}/>
             <p className='w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus unde labore quisquam veritatis, deleniti corporis veniam repellendus quo deserunt, nam temporibus saepe. A facere quas asperiores consectetur sit nisi. Impedit.</p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus unde labore quisquam veritatis, deleniti corporis veniam repellendus quo deserunt, nam temporibus saepe. A facere quas asperiores consectetur sit nisi. Impedit.
+            </p>
         </div>
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6' >
-        { bestSeller.map((item,index)=>(
+        {
+         bestSeller.map((item,index)=>(
           <Productitem key={index} id={item.id} image={item.image} name={item.name} price={item.price}/>
         ))
          

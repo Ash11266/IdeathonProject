@@ -9,13 +9,14 @@ const Verify = () => {
     const[searchParams,setSearchParams]=useSearchParams()
     const success=searchParams.get('success')
     const orderId=searchParams.get('orderId')
+
     const verifyPayment=async()=>{
         try {
             if (!token) {
                 return null;
                 
             }
-            const response=await axios.post(backendUrl+'/api/order/verifyStripe',{success,orderId},{headers:{token}})
+            const response=await Axios.post(backendUrl+'/api/order/verifyStripe',{success,orderId},{headers:{token}})
             if (response.data.success) {
                 setCartItems({})
                 navigate('/orders')
@@ -35,7 +36,7 @@ const Verify = () => {
     },[token])
   return (
     <div>
-      
+      Verify
     </div>
   )
 }

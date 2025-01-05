@@ -11,6 +11,8 @@ const Collection = () => {
   const[category,setCategory]=useState([]);
   const[subCategory,setSubcategory]=useState([]);
   const[sortType,setSortType]=useState('relevant');
+
+
   const toggleCategory=(e)=>{
     if(category.includes(e.target.value)){
       setCategory(prev=>prev.filter(item=>item!==e.target.value))
@@ -19,6 +21,8 @@ const Collection = () => {
       setCategory(prev=>[...prev,e.target.value])
     }
   }
+
+
   const toggleSubCategory=(e)=>{
     if(subCategory.includes(e.target.value)){
       setSubcategory(prev=>prev.filter(item=>item !== e.target.value))
@@ -27,6 +31,8 @@ const Collection = () => {
       setSubcategory(prev=>[...prev,e.target.value])
     }
   }
+
+
   const applyFilter=()=>{
     let productsCopy=products.slice();
     if(showSearch && search){
@@ -40,6 +46,8 @@ const Collection = () => {
     }
     setFilterProducts(productsCopy)
   }
+
+
   const sortProduct=()=>{
     let fpCopy=filterProducts.slice();
      switch(sortType){
@@ -55,17 +63,23 @@ const Collection = () => {
 
      }
   }
+
+
   useEffect(()=>{
     applyFilter();
   },[category,subCategory,search,showSearch,products])
+
+
   useEffect(()=>{
     sortProduct();
   },[sortType])
+
+
   return (
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 border-t'>
       {/* filter options*/}
       <div className='min-w-60'>
-        <p onClick={()=>setShowFilter(!showFilter)} className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS
+        <p onClick={()=>{setShowFilter(!showFilter)}} className='my-2 text-xl flex items-center cursor-pointer gap-2'>FILTERS
           <img src={assets.dropdown_icon} className={`h-3 sm:hidden ${showFilter?'rotate-90':''}`} alt="" />
         </p>
         {/* Category filter  */}
