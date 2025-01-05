@@ -1,11 +1,12 @@
 import userModel from "../models/userModel.js";
 import validator from "validator";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+
 
 const createToken=(id)=>
 {
-    return jwt.sign({id},process.env.JWT_SECRET)
+    return jwt.sign({id},process.env.JWT_SECRET, { expiresIn: '1h' });
 }
 
 //Route for user login
@@ -39,6 +40,9 @@ const registerUser=async(req,res)=>{
 
    try{
     const {name,email,password}=req.body;
+    if (!name || !email || !password) {
+        return res.json({ success: false, message: "All fields are required" });
+    }
     //checking user already exists or not
     const exists=await userModel.findOne({email});
     if(exists){
@@ -65,7 +69,7 @@ const registerUser=async(req,res)=>{
     const user=await newUser.save()
 
     const token= createToken(user._id)
-    res.json({success:true,token})
+    res.json({ success: true, message: "User created successfully", token });
 
    }       catch(error)
    {

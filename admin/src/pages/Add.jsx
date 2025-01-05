@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { assets } from "../assets/assets"
 import axios from "axios"
 import { backendUrl } from "../App"
+import { toast } from "react-toastify"
 
 const Add=()=>{
 
@@ -31,21 +32,23 @@ const Add=()=>{
           formData.append("bestseller",bestseller)
           formData.append("sizes",JSON.stringify(sizes))
 
-          image1 && formData.append("image1",image1)
-          image2 && formData.append("image2",image2)
-          image3 && formData.append("image3",image3)
-          image4 && formData.append("image4",image4)
-
+          formData.append('image1', image1 ? image1 : null)
+          formData.append('image2', image2 ? image2 : null)
+          formData.append('image3', image3 ? image3 : null)
+          formData.append('image4', image4 ? image4 : null)
           const response=await axios.post(backendUrl+ "/api/product/add",formData,{headers:{token}})
           if(response.data.success){
             toast.success(response.data.message)
             setName('')
             setDescription('')
-            setImage1(false)
-            setImage2(false)
-            setImage3(false)
-            setImage4(false)
+            setImage1('')
+            setImage2('')
+            setImage3('')
+            setImage4('')
             setPrice('')
+            setSizes([])
+            setBestseller(false)
+            
           }else{
             toast.error(response.data.message)
           }

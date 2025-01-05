@@ -1,5 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import razorpay from 'razorpay'
 import orderModel from '../models/orderModel.js'
 import userModel from '../models/userModel.js'
 
@@ -7,10 +6,12 @@ import Stripe from 'stripe'
 const currency='inr'
 const deliveryCharge=10
 
-const stripe=new Stripe("sk_test_51QcTj4IX8xxWzZl0dAFSqGS95ZsgAKOyHXKD6UtZpXjZShRor6Fo2mDJozFszV6e52U27rP3zuTyTwoui7bMhlfa00L91z8nWP")
-if (!process.env.STRIPE_SECRET_KEY) {
-    throw new Error('STRIPE_SECRET_KEY is not defined');
-  }
+const stripe=new Stripe(process.env.STRIPE_SECRET_KEY)
+const  razorpayInstance = new razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET
+})
+
 
 const placeOrder= async(req,res)=>{
    try{
@@ -18,6 +19,7 @@ const placeOrder= async(req,res)=>{
     const orderData={
         userId,
         items,
+        address,
         amount,
         paymentMethod:"COD",
         payment:false,
@@ -54,10 +56,11 @@ const verifyStripe=async(req,res)=>{
 const placeOrderStripe= async(req,res)=>{
     try {
         const{userId,items,amount,address}=req.body
-        const{origin}=req.headers
+       
         const orderData={
             userId,
             items,
+            address,
             amount,
             paymentMethod:"Stripe",
             payment:false,
@@ -103,9 +106,60 @@ const placeOrderStripe= async(req,res)=>{
 }
 
 const placeOrderRazorpay= async(req,res)=>{
+    try {
+        const { userId, items, amount, address} = req.body;
+
+        const orderData = {
+            userId,
+            items,
+            address,
+            amount,
+            paymentMethod: "Stripe",
+            payment : false,
+            date: Date.now()
+        }
+
+        const newOrder = new orderModel(orderData)
+        await newOrder.save()
+
+        const options = {
+            amount: amount * 100,
+            currency: currency.toUpperCase(),
+            receipt : newOrder._id.toString()
+        }
+            
+        await razorpayInstance.orders.create(options, (error, order)=>{
+            if (error) {
+                console.log(error)
+                return res.json({success: false, message: error})
+            }
+            res.json({success : true, order} )
+        })
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
 
 
     
+}
+
+const verifyRazorpay = async(req, res)=>{
+    try {
+        const { userId, razorpay_order_id} = req.body
+
+        const orderInfo = await  razorpayInstance.orders.fetch(razorpay_order_id)
+        if (orderInfo.status === 'paid') {
+            await orderModel.findByIdAndUpdate(orderInfo.receipt, {payment: true} ) ;
+            await userModel.findByIdAndUpdate(userId, {cartData: {} })
+            res.json({ success: true, message: "Payment Successful" })
+        } else {
+            res.json({ success: false, message: 'Payment Failed' });
+        }
+    } catch (error) {
+        console.log(error)
+        res.json({success: false, message: error.message})
+    }
 }
 
 //
@@ -146,5 +200,5 @@ try {
    
 }
 
-export{verifyStripe,placeOrder,placeOrderRazorpay,placeOrderStripe,allOrders,updateStatus,userOrders};
+export{verifyStripe,verifyRazorpay,placeOrder,placeOrderRazorpay,placeOrderStripe,allOrders,updateStatus,userOrders};
 

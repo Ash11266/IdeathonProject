@@ -9,9 +9,12 @@ const Navbar = () => {
 
 
  const logout=()=>{
+  localStorage.removeItem('token')
+  
+
+  setToken('')
+  setCartItems({})
   navigate('/login')
-localStorage.removeItem('token')
-setToken({})
 
 }
 
