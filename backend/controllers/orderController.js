@@ -6,10 +6,10 @@ import Stripe from 'stripe'
 const currency='inr'
 const deliveryCharge=10
 
-const stripe=new Stripe(process.env.STRIPE_SECRET_KEY)
+const stripe=new Stripe("sk_test_51QcTj4IX8xxWzZl0dAFSqGS95ZsgAKOyHXKD6UtZpXjZShRor6Fo2mDJozFszV6e52U27rP3zuTyTwoui7bMhlfa00L91z8nWP")
 const  razorpayInstance = new razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
+    key_id: "rzp_test_Q13Kh5Own98eXP",
+    key_secret: "bQ5djpEA6nvkKINuMSiyKxNU"
 })
 
 

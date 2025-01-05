@@ -9,7 +9,8 @@ import { toast } from 'react-toastify'
 const PlaceOrder = () => {
 
   const [method,setMethod]=useState('cod');
-  const{navigate,backendUrl,token,cartItems,setCartItems,getCartAmount,delivery_fee,products}=useContext(ShopContext);
+  const{navigate,token,cartItems,setCartItems,getCartAmount,delivery_fee,products}=useContext(ShopContext);
+  const backendUrl = 'http://localhost:4000';
   const[formData,setFormData]=useState({
   firstName:'',
   lastName:'',
@@ -32,7 +33,7 @@ const PlaceOrder = () => {
 
   const initPay = (order) => {
     const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY_ID,
+      key: "rzp_test_Q13Kh5Own98eXP",
       amount: order.amount,
       currency: order.currency,
       name: 'Order Payment',
@@ -42,7 +43,8 @@ const PlaceOrder = () => {
       handler: async (response) => {
         console.log(response)
         try {
-          const {data}  = await axios.post(backendUrl+'/api/order/verifyRazorpay', response, {headers: {token}})
+        
+          const {data}  = await axios.post(backendUrl+'/api/order/verifyRazorpay', response, {headers: `success`})
           if(data.success){
             navigate('/orders')
             setCartItems({})
@@ -92,7 +94,7 @@ const PlaceOrder = () => {
           `${backendUrl}api/order/place`,
           orderData,
           {
-            headers: { token }, 
+            headers: 'success', 
           })
           if(response.data.success)
           {
@@ -104,7 +106,7 @@ const PlaceOrder = () => {
           
         break;
         case 'stripe':
-          const responseStripe=await axios.post(backendUrl+'/api/order/stripe',orderData,{headers:{token}})
+          const responseStripe=await axios.post(backendUrl+'/api/order/stripe',orderData,{headers:`success`})
           if (responseStripe.data.success) {
             const {session_url}=responseStripe.data
             window.location.replace(session_url)
@@ -114,7 +116,7 @@ const PlaceOrder = () => {
           }
           break;
           case 'razorpay':
-            const responseRazorpay = await axios.post(backendUrl+'/api/order/razorpay', orderData, {headers:{token}})
+            const responseRazorpay = await axios.post(backendUrl+'/api/order/razorpay', orderData, {headers:`success`})
             if(responseRazorpay.data.success){
               initPay(responseRazorpay.data.order)
               // const {session_url} = responseStripe.data

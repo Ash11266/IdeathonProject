@@ -16,7 +16,7 @@ const Verify = () => {
                 return null;
                 
             }
-            const response=await Axios.post(backendUrl+'/api/order/verifyStripe',{success,orderId},{headers:{token}})
+            const response=await Axios.post(backendUrl+'/api/order/verifyStripe',{success,orderId},{headers:`success`})
             if (response.data.success) {
                 setCartItems({})
                 navigate('/orders')
