@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes,Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Collection from './pages/Collection'
-import Home from './pages/home'
+import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import ChatRooms from './pages/ChatRooms'
@@ -19,6 +19,7 @@ import Verify from './pages/Verify'
 
 const App = () =>  {
   return ( 
+    
   <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <ToastContainer/>
       <Navbar/>
