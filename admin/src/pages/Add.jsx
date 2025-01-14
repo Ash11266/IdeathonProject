@@ -168,13 +168,13 @@ const Add=()=>{
                 <div
                   onClick={() =>
                     setSizes((prev) =>
-                      prev.includes("S") ? prev.filter((item) => item !== "S") : [...prev, "S"]
+                      prev.includes("Hardcover") ? prev.filter((item) => item !== "Hardcover") : [...prev, "Hardcover"]
                     )
                   }
                 >
                   <p
                     className={`${
-                      sizes.includes("S") ? "bg-pink-100" : "bg-slate-200"
+                      sizes.includes("Hardcover") ? "bg-pink-100" : "bg-slate-200"
                     } px-3 py-1 cursor-pointer`}
                   >
                     S
@@ -183,13 +183,13 @@ const Add=()=>{
                 <div
                   onClick={() =>
                     setSizes((prev) =>
-                      prev.includes("M") ? prev.filter((item) => item !== "M") : [...prev, "M"]
+                      prev.includes("Paperback") ? prev.filter((item) => item !== "Paperback") : [...prev, "Paperback"]
                     )
                   }
                 >
                   <p
                     className={`${
-                      sizes.includes("M") ? "bg-pink-100" : "bg-slate-200"
+                      sizes.includes("Paperback") ? "bg-pink-100" : "bg-slate-200"
                     } px-3 py-1 cursor-pointer`}
                   >
                     M
@@ -198,33 +198,19 @@ const Add=()=>{
                 <div
                   onClick={() =>
                     setSizes((prev) =>
-                      prev.includes("L") ? prev.filter((item) => item !== "L") : [...prev, "L"]
+                      prev.includes("Ebook") ? prev.filter((item) => item !== "Ebook") : [...prev, "Ebook"]
                     )
                   }
                 >
                   <p
                     className={`${
-                      sizes.includes("L") ? "bg-pink-100" : "bg-slate-200"
+                      sizes.includes("Ebook") ? "bg-pink-100" : "bg-slate-200"
                     } px-3 py-1 cursor-pointer`}
                   >
                     L
                   </p>
                 </div>
-                <div
-                  onClick={() =>
-                    setSizes((prev) =>
-                      prev.includes("XL") ? prev.filter((item) => item !== "XL") : [...prev, "XL"]
-                    )
-                  }
-                >
-                  <p
-                    className={`${
-                      sizes.includes("XL") ? "bg-pink-100" : "bg-slate-200"
-                    } px-3 py-1 cursor-pointer`}
-                  >
-                    XL
-                  </p>
-                </div>
+                
               </div>
             </div>
           </div>
