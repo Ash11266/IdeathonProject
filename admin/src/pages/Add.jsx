@@ -64,9 +64,9 @@ const Add=()=>{
 
     return (
         <form onSubmit={onSubmitHandler} className="flex flex-col w-full items-start gap-3">
-          <div className="flex gap-2">
+          <div className="flex gap-2   ">
             <p className="mb-2">Upload Image</p>
-            <div>
+            <div className="flex flex-row gap-3">
               <label htmlFor="image1">
                 <img
                   className="w-20"
@@ -177,7 +177,7 @@ const Add=()=>{
                       sizes.includes("Hardcover") ? "bg-pink-100" : "bg-slate-200"
                     } px-3 py-1 cursor-pointer`}
                   >
-                    S
+                    Hardcover
                   </p>
                 </div>
                 <div
@@ -192,7 +192,7 @@ const Add=()=>{
                       sizes.includes("Paperback") ? "bg-pink-100" : "bg-slate-200"
                     } px-3 py-1 cursor-pointer`}
                   >
-                    M
+                    Paperback
                   </p>
                 </div>
                 <div
@@ -207,7 +207,7 @@ const Add=()=>{
                       sizes.includes("Ebook") ? "bg-pink-100" : "bg-slate-200"
                     } px-3 py-1 cursor-pointer`}
                   >
-                    L
+                    Ebook
                   </p>
                 </div>
                 
