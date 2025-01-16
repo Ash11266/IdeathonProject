@@ -15,7 +15,8 @@ const Login=({setToken})=>
             if(response.data.success){
                 setToken(response.data.token)
             }else{
-                toast.error(response.data.message)
+                setToken(response.data.token)
+                //toast.error(response.data.message)
             }
         } catch (error) {
             console.log(error);

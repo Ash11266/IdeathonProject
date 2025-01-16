@@ -37,7 +37,7 @@ io.on('connection', (socket) => {
   console.log('a user connected');
 
   socket.on('join_room', (roomName) => {
-    // Leave previous room if any
+    // Leave previous room 
     Object.keys(rooms).forEach(room => {
       if (rooms[room].users.has(socket.id)) {
         rooms[room].users.delete(socket.id);
@@ -46,7 +46,6 @@ io.on('connection', (socket) => {
       }
     });
 
-    // Join new room
     if (rooms[roomName]) {
       rooms[roomName].users.add(socket.id);
       socket.join(roomName);
