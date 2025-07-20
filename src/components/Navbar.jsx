@@ -50,7 +50,7 @@ const Navbar = () => {
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
         </NavLink>
 
-        <NavLink to='http://localhost:5174/' className="flex flex-col items-center gap-1">
+        <NavLink to='https://booksy-admin.vercel.app/' className="flex flex-col items-center gap-1">
           <p>ADMIN PANEL</p>
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden'/>
           </NavLink>
