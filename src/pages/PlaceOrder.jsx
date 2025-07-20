@@ -10,7 +10,7 @@ const PlaceOrder = () => {
 
   const [method,setMethod]=useState('cod');
   const{navigate,token,cartItems,setCartItems,getCartAmount,delivery_fee,products}=useContext(ShopContext);
-  const backendUrl = 'http://localhost:4000';
+  const backendUrl = 'https://booksybackend.onrender.com';
   const[formData,setFormData]=useState({
   firstName:'',
   lastName:'',
